@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".FoodListFragment">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Food"
+            android:textSize="40dp"
+            android:textStyle="bold"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="10dp"
+            android:textColor="@color/primary"
+
+            />
+
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:elevation="12dp"
+            android:id="@+id/view2"
+            app:cardCornerRadius="40dp"
+            android:layout_centerHorizontal="true"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="20dp"
+
+            >
+            <ImageView
+                android:layout_height="50dp"
+                android:layout_width="match_parent"
+                android:id="@+id/profileImage"
+                android:src="@drawable/ic_launcher_foreground"
+                android:scaleType="centerCrop"
+                app:tint="@color/primary"
+                android:contentDescription="profile" />
+
+        </androidx.cardview.widget.CardView>
+
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_begin="85dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Category"
+            app:layout_constraintTop_toBottomOf="@id/guideline2"
+            app:layout_constraintStart_toStartOf="parent"
+            android:textColor="@color/black"
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="20dp"
+            android:textSize="20sp"
+            android:id="@+id/categoryText"
+            android:textStyle="bold"
+            />
+
+            <HorizontalScrollView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/categoryText"
+                android:padding="10dp"
+                android:scrollbars="none"
+                >
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:id="@+id/categoryButtons"
+                    >
+
+                    <com.google.android.material.button.MaterialButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:cornerRadius="50dp"
+                        android:text="All Time"
+                        android:textColor="@color/primary"
+                        android:textSize="15sp"
+                        android:layout_marginStart="10dp"
+                        style="?attr/materialButtonOutlinedStyle"
+                        />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:cornerRadius="50dp"
+                        android:layout_marginStart="10dp"
+                        android:textSize="15sp"
+                        android:text="Breakfast"
+                        style="?attr/materialButtonOutlinedStyle"
+                        android:textColor="@color/primary"
+                        />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:cornerRadius="50dp"
+                        android:layout_marginStart="10dp"
+                        android:textSize="15sp"
+                        android:text="Lunch"
+                        style="?attr/materialButtonOutlinedStyle"
+                        android:textColor="@color/primary"
+                        />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:cornerRadius="50dp"
+                        android:layout_marginStart="10dp"
+                        android:textSize="15sp"
+                        android:text="Snacks"
+                        style="?attr/materialButtonOutlinedStyle"
+                        android:textColor="@color/primary"
+                        />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:cornerRadius="50dp"
+                        android:layout_marginStart="10dp"
+                        android:textSize="15sp"
+                        android:text="Dinner"
+                        style="?attr/materialButtonOutlinedStyle"
+                        android:textColor="@color/primary"
+                        />
+
+                </LinearLayout>
+
+            </HorizontalScrollView>
+
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</FrameLayout>
