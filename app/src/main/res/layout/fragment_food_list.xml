@@ -6,6 +6,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".FoodListFragment">
 
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -77,6 +78,7 @@
                 app:layout_constraintTop_toBottomOf="@id/categoryText"
                 android:padding="10dp"
                 android:scrollbars="none"
+                android:id="@+id/categoryButtonScrollView"
                 >
                 <LinearLayout
                     android:layout_width="wrap_content"
@@ -144,6 +146,17 @@
 
             </HorizontalScrollView>
 
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@+id/categoryButtonScrollView"
+            >
+            <androidx.recyclerview.widget.RecyclerView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/foodRecView"/>
+
+        </androidx.core.widget.NestedScrollView>
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

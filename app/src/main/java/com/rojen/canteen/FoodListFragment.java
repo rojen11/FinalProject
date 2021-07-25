@@ -11,6 +11,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AbsListView;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -18,7 +19,11 @@ import android.widget.LinearLayout;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.firebase.auth.FirebaseAuth;
+import com.rojen.canteen.adapters.FoodRecyclerViewAdapter;
 import com.rojen.canteen.viewmodels.FoodListViewModel;
+
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
@@ -37,7 +42,7 @@ public class FoodListFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
-
+    LinearLayout categoryButtons;
     FoodListViewModel model;
 
     public FoodListFragment() {
@@ -105,13 +110,16 @@ public class FoodListFragment extends Fragment {
         });
 
 
-
-        LinearLayout categoryButtons = view.findViewById(R.id.categoryButtons);
+        categoryButtons = view.findViewById(R.id.categoryButtons);
 
         model = new ViewModelProvider(requireActivity()).get(FoodListViewModel.class);
 
 
+        // Start from first category
+        setCurrent(0);
 
+
+        // Category button click events
         for (int i = 0; i < categoryButtons.getChildCount(); ++i) {
             // Get single button
             Button button = (Button) categoryButtons.getChildAt(i);
@@ -120,21 +128,35 @@ public class FoodListFragment extends Fragment {
                 @Override
                 public void onClick(View v) {
                     // Change active button
-                    Button prevButton = (Button) categoryButtons.getChildAt(model.getCurrent());
-                    prevButton.setBackgroundColor(getResources().getColor(R.color.white));
-                    prevButton.setTextColor(getResources().getColor(R.color.primary));
-
-                    button.setBackgroundColor(getResources().getColor(R.color.primary));
-                    button.setTextColor(getResources().getColor(R.color.white));
-
-                    model.setCurrent(finalI);
-
+                    setCurrent(finalI);
                 }
             });
         }
 
 
+        RecyclerView foodRecView = view.findViewById(R.id.foodRecView);
+
+        FoodRecyclerViewAdapter foodRecyclerViewAdapter = new FoodRecyclerViewAdapter(getContext());
+
+        foodRecView.setAdapter(foodRecyclerViewAdapter);
+
+        foodRecView.setLayoutManager(new GridLayoutManager(getContext(), 2));
+
 
         return view;
+    }
+
+    // set category with given index
+    private void setCurrent(int i) {
+        Button button = (Button) categoryButtons.getChildAt(i);
+        Button prevButton = (Button) categoryButtons.getChildAt(model.getCurrent());
+        prevButton.setBackgroundColor(getResources().getColor(R.color.white));
+        prevButton.setTextColor(getResources().getColor(R.color.primary));
+
+        button.setBackgroundColor(getResources().getColor(R.color.primary));
+        button.setTextColor(getResources().getColor(R.color.white));
+
+        model.setCurrent(i);
+
     }
 }
