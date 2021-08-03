@@ -1,16 +1,25 @@
 package com.rojen.canteen.model;
 
+
 public class FoodModel {
     private String itemName;
     private String itemPrice;
-    private String itemQuantity;
+    private int itemQuantity;
     private String itemPicture;
+    private String itemType;
+    private int id;
 
-    public FoodModel(String itemName, String itemPrice, String itemQuantity, String itemPicture) {
+    public FoodModel() {
+
+    }
+
+    public FoodModel(String itemName, String itemPrice, int itemQuantity, String itemPicture, String itemType, int id) {
         this.itemName = itemName;
         this.itemPrice = itemPrice;
         this.itemQuantity = itemQuantity;
         this.itemPicture = itemPicture;
+        this.itemType = itemType;
+        this.id = id;
     }
 
     public String getItemName() {
@@ -29,11 +38,11 @@ public class FoodModel {
         this.itemPrice = itemPrice;
     }
 
-    public String getItemQuantity() {
+    public int getItemQuantity() {
         return itemQuantity;
     }
 
-    public void setItemQuantity(String itemQuantity) {
+    public void setItemQuantity(int itemQuantity) {
         this.itemQuantity = itemQuantity;
     }
 
@@ -44,4 +53,22 @@ public class FoodModel {
     public void setItemPicture(String itemPicture) {
         this.itemPicture = itemPicture;
     }
+
+    public String getItemType() {
+        return itemType;
+    }
+
+    public void setItemType(String itemType) {
+        this.itemType = itemType;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+
 }

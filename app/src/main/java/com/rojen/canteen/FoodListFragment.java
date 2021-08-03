@@ -7,25 +7,21 @@ import android.os.Bundle;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AbsListView;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
-import com.google.android.material.button.MaterialButton;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.firebase.auth.FirebaseAuth;
 import com.rojen.canteen.adapters.FoodRecyclerViewAdapter;
 import com.rojen.canteen.viewmodels.FoodListViewModel;
 
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
-import java.util.ArrayList;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -42,8 +38,10 @@ public class FoodListFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+
+    //
     LinearLayout categoryButtons;
-    FoodListViewModel model;
+    FoodListViewModel foodListViewModel;
 
     public FoodListFragment() {
         // Required empty public constructor
@@ -84,6 +82,7 @@ public class FoodListFragment extends Fragment {
 
         // Profile logout
         ImageView profileImage = view.findViewById(R.id.profileImage);
+        ImageView cartButton = view.findViewById(R.id.cartButton);
 
         profileImage.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -112,7 +111,14 @@ public class FoodListFragment extends Fragment {
 
         categoryButtons = view.findViewById(R.id.categoryButtons);
 
-        model = new ViewModelProvider(requireActivity()).get(FoodListViewModel.class);
+        foodListViewModel = new ViewModelProvider(requireActivity()).get(FoodListViewModel.class);
+
+        cartButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Navigation.findNavController(view).navigate(R.id.action_foodListFragment_to_cartListFragment);
+            }
+        });
 
 
         // Start from first category
@@ -142,6 +148,9 @@ public class FoodListFragment extends Fragment {
 
         foodRecView.setLayoutManager(new GridLayoutManager(getContext(), 2));
 
+        foodListViewModel.getAllFood().observe(getViewLifecycleOwner(), fl -> foodListViewModel.setCurrentFood());
+
+        foodListViewModel.getFood().observe(getViewLifecycleOwner(), foodRecyclerViewAdapter::setFoods);
 
         return view;
     }
@@ -149,14 +158,14 @@ public class FoodListFragment extends Fragment {
     // set category with given index
     private void setCurrent(int i) {
         Button button = (Button) categoryButtons.getChildAt(i);
-        Button prevButton = (Button) categoryButtons.getChildAt(model.getCurrent());
+        Button prevButton = (Button) categoryButtons.getChildAt(foodListViewModel.getCurrent());
         prevButton.setBackgroundColor(getResources().getColor(R.color.white));
         prevButton.setTextColor(getResources().getColor(R.color.primary));
 
         button.setBackgroundColor(getResources().getColor(R.color.primary));
         button.setTextColor(getResources().getColor(R.color.white));
 
-        model.setCurrent(i);
+        foodListViewModel.setCurrent(i);
 
     }
 }
